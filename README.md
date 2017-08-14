@@ -3,7 +3,6 @@
 
 ###### 项目技术架构
 * vue-cli<br>
-* vue2.0
 * axios
 * vue-router
 * vuex
