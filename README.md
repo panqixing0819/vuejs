@@ -40,3 +40,7 @@
     npm install
 ##### 启动服务(http://localhost:8080)
     npm run dev
+    
+###### 最后
+---
+* 如果喜欢的话给个star 谢谢。
