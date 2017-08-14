@@ -1,11 +1,11 @@
 # vuejs
 基于vue2.0 + vue-router + vuex + webpack + es6 的一个初级项目(目前还在完善),同时还加了vue-awesome-swiper的切屏效果看上去效果更好
 
->###### 接口地址  http://gank.io/
+>###### 接口地址     http://gank.io/
 
 >###### Demo地址     https://panqixing0819.github.io/vuejs/ （请用chrome的手机模式预览）
 
->###### github地址  https://github.com/panqixing0819/vuejs
+>###### github地址   https://github.com/panqixing0819/vuejs
 
 
 ###### 项目技术架构
