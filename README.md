@@ -30,5 +30,5 @@
 * 我的收藏
 * 登录
 * 等等
-public static void main(String[]args){} 
+
 
