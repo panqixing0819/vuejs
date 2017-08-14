@@ -34,7 +34,7 @@
 * 等等
 
 ##### 安装
-    git clone https://github.com/panqixing0819/vuejs.git(项目地址)
+  ##### git clone https://github.com/panqixing0819/vuejs.git(项目地址)
 
 ##### 通过npm安装本地服务第三方依赖模块(需要已安装Node.js)
         npm install
