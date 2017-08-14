@@ -18,11 +18,15 @@ time, mark, audio, video, input {
   font-weight: normal;
   vertical-align: baseline;
 }
-
+img{
+  max-width: 100%;
+}
 li {
   list-style: none; }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
  }
-  
+*{
+  box-sizing: border-box;
+}

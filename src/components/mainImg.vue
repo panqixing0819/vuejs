@@ -1,28 +1,23 @@
 <template>
-	
-	<div class="main-img" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-		<show-img v-show="imgOff" :dataimg='data_Num'></show-img>
+	<div class="main-img" v-infinite-scroll="loadMore"    infinite-scroll-distance="500">
 		<div v-show="off">
 			<ul>
 				<li v-for="(data,index) in data1">
-					<!--<router-link to='/mainimg1'><img   v-lazy='data' :data='data'/></router-link>-->
-					<img v-on:click="alert"  v-lazy='data'  :id="data" />
+					<img v-on:click="alert" :dataTime="data.createdAt.slice(0,10)"  v-lazy='data.url'   :id="data"  />
 				</li>
 			</ul>
 			<ul>
 				<li v-for="data in data2">
-					<!--<router-link to='/mainimg1'><img v-lazy='data'  :data='data' /></router-link>-->
-					<img v-on:click="alert"  v-lazy='data'  :data='data' />
+					<img v-on:click="alert"  :dataTime="data.createdAt.slice(0,10)"  v-lazy='data.url'  :data='data' />
 				</li>
 			</ul>
 		</div>
-		
+		<show-img v-show="imgOff" :dataimg='data_Num' :dataTime="dataTime1" v-on:change="change_off"></show-img>
 	</div>
 </template>
 <script>
-//var ;
-//var ;
-import imgDetali from './imgDetali.vue'
+import imgDetali from './imgDetali.vue';
+import axios from "axios";
 export default{
 	name:"main-img",
 	data(){
@@ -34,38 +29,58 @@ export default{
 			data_Num:'',
 			off:true,
 			imgOff:false,
-			shu:22
+			shu:22,
+			off1:false,
+			dataTime1:''
 		}
 	},
 	components:{
 		showImg:imgDetali
 	},
-	created:function(){
+	mounted:function(){
+		this.$store.commit('title_change','福利')
 		this.ajax(this.num,this.page1);
 	},
 	methods:{
 		ajax:function(num,a){
-			this.$http.get("https://gank.io/api/data/福利/"+num+"/"+a+"")
-				.then(function(data){
-					for(var i=0;i<data.body.results.length;i++){
-						if(i%2==0){
-							this.data1.push(data.data.results[i].url);	
-						}else{
-							this.data2.push(data.data.results[i].url);
+			this.$store.commit('change');
+			this.off1=false;
+			axios.get("https://gank.io/api/data/福利/"+num+"/"+a+"")
+					.then((data)=>{
+						for(var i=0;i<data.data.results.length;i++){
+							if(i%2==0){
+								this.data1.push(data.data.results[i]);	
+							}else{
+								this.data2.push(data.data.results[i]);
+							}
 						}
-					}
-					
-				},function(){
-					alert('错误')
-				})
+						this.off1=true;
+						this.$nextTick(()=>{
+							this.$store.commit('change_off');
+						})
+					}).catch((error)=>{
+						console.log(error);
+					})
+				
 		},
 		loadMore:function(){
-			this.busy = true;
-			this.page1+=1;
-	        this.ajax(this.num,this.page1);
+			if(this.off1){
+				this.page1+=1;
+				this.ajax(this.num,this.page1);
+			}
 		},
 		alert:function(ev){
-			this.data_Num=ev.target.src
+			this.$store.commit('change');
+			this.data_Num=ev.target.src;
+			this.off=!this.off
+			this.imgOff=!this.imgOff;
+			// console.log(ev);
+			// console.log(ev.target.attributes['datatime'].value);
+			// console.log(ev.target)
+			// this.dataTime=ev.target.dataTime;
+			this.dataTime1=ev.target.attributes['dataTime'].value;	
+		},
+		change_off(){
 			this.off=!this.off
 			this.imgOff=!this.imgOff
 		}
@@ -100,7 +115,12 @@ img[lazy=loading] {
   background-image: url(../../static/img/load.gif);
   background-repeat: no-repeat;
   background-position: center;
-  }        
- 
-        
+}        
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+     
 </style>

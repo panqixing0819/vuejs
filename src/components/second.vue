@@ -15,7 +15,7 @@ export default{
         }
     },
     created:function(){
-      
+        console.log(this.$route.params);
     },
     methods:{
         a1:function(){
