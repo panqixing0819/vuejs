@@ -3,7 +3,7 @@
 
 ##### 项目地址   https://panqixing0819.github.io/vuejs/
 
-###### 项目技术架构
+###### Demo技术架构
 ---
 * vue2.0
 * vue-cli<br>
