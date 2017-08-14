@@ -34,5 +34,5 @@
 * 等等
 
 ##### 安装
->git clone 
+    >git clone https://github.com/panqixing0819/vuejs.git
 
